@@ -1,0 +1,6 @@
+{
+    "require": {
+        "heroku/heroku-buildpack-php": "^225.0",
+        "firebase/php-jwt": "^5.2"
+    }
+}
