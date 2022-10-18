@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    echo $_GET['id'];
     if(isset($_GET['id'])){
         $id = $conn->real_escape_string($_GET['id']);
         $sql = $conn->query("DELETE FROM pulseras WHERE id = '$id");
