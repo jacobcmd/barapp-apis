@@ -5,7 +5,7 @@ include_once 'config/cors.php';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if(isset($_GET['id'])){
         $id =$conn->real_escape_string($_GET['id']);
-        $sql = $conn->query("SELECT * FROM heroku_f81cf5f857f3c19.pulseras WHERE id = '$id");
+        $sql = $conn->query("SELECT * FROM pulseras WHERE id = '$id");
         $data = $sql->fetch_assoc();
     }else{
         //exit(json_encode(array('status' => 'pulcera no registrada')));

@@ -5,7 +5,7 @@ include_once 'config/cors.php';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if(isset($_GET['id'])){
         $id =$conn->real_escape_string($_GET['id']);
-        $sql = $conn->query("SELECT * FROM students WHERE id = '$id");
+        $sql = $conn->query("SELECT * FROM students WHERE id = $id");
         $data = $sql->fetch_assoc();
     }else{
         $data = array();
