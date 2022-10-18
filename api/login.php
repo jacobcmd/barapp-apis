@@ -7,10 +7,7 @@ use \Firebase\JWT\JWT;
 include_once 'config/cors.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = json_decode(file_get_contents("php://input"));
-
-	$uname = $data->username;
-    $pass = $data->password;
+    
 
     $sql = $conn->query("SELECT * FROM users WHERE username = '$uname'"); 
     if ($sql->num_rows > 0) {
