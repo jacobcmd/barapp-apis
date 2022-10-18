@@ -46,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     $data = json_decode(file_get_contents("php://input"));
     $id = $data->id;
-    if(isset($id)){
+    echo $id;
+    /*if(isset($id)){
         
         $sql = $conn->query("DELETE FROM pulseras WHERE id = '$id");
 
@@ -55,5 +56,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         } else{
             exit(json_encode(array('status' => 'error')));
         }
-    }
+    }*/
 }
