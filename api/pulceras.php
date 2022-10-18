@@ -8,7 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $sql = $conn->query("SELECT * FROM pulseras WHERE id = '$id");
         $data = $sql->fetch_assoc();
     }else{
-        exit(json_encode(array('status' => 'pulcera no registrada')));
+        //exit(json_encode(array('status' => 'pulcera no registrada')));
+        $data = array();
+        $sql = $conn->query("SELECT * FROM students");
+        while ($d = $sql->fetch_assoc()){
+            $data[] = $d;
+        }
     }
 
     exit(json_encode($data));
