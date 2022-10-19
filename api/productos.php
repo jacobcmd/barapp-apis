@@ -3,10 +3,17 @@ include_once 'config/dbh.php';
 include_once 'config/cors.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if(isset($_GET['id'])){
-        $id =$conn->real_escape_string($_GET['id']);
-        $sql = $conn->query("SELECT * FROM productos WHERE id = '$id");
+    $data = json_decode(file_get_contents("php://input"));
+
+	$id = $data->id;
+
+    if(isset($id)){
+        $id = $conn->real_escape_string($data->id);        
+        $sql = $conn->query("SELECT * FROM productos WHERE id = '$id'");
         $data = $sql->fetch_assoc();
+        if($data==null){
+            exit(json_encode(array('status' => 'pulcera no registrada')));
+        }
     }else{
         $data = array();
         $sql = $conn->query("SELECT * FROM productos");
@@ -30,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
- if(isset($_GET['id'])){
-    $id = $conn->real_escape_string($_GET['id']);
     $data = json_decode(file_get_contents("php://input"));
-    $sql = $conn->query("UPDATE productos SET nombre = '".$data->nombre."', precio = '".$data->precio."', disponible = '".$data->disponible."' WHERE id = '$id'");
+    $id = $data->id;
+ if(isset($id)){    
+    $sql = $conn->query("UPDATE productos SET nombre = '".$data->nombre."',  precio = '".$data->precio."',  disponible = '".$data->disponible."' WHERE id = '$id'");
     if ($sql){
         exit(json_encode(array('status' => 'success')));
     }else{
@@ -43,9 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    if(isset($_GET['id'])){
-        $id = $conn->real_escape_string($_GET['id']);
-        $sql = $conn->query("DELETE FROM productos WHERE id = '$id");
+    $data = json_decode(file_get_contents("php://input"));
+    $id = $data->id;
+
+    if(isset($id)){
+        
+        $sql = $conn->query("DELETE FROM productos WHERE id = '$id'");
 
         if($sql) {
             exit(json_encode(array('status' => 'success')));
