@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
     if(isset($id)){
         
-        $sql = $conn->query("DELETE FROM pulseras WHERE id = $id");
+        $sql = $conn->query("DELETE FROM pulseras WHERE id = '$id'");
 
         if($sql) {
             exit(json_encode(array('status' => 'success')));
