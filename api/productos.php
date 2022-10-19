@@ -41,12 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     $id = $data->id;
  if(isset($id)){    
     $sql = $conn->query("UPDATE productos SET nombre = '".$data->nombre."',  precio = '".$data->precio."',  disponible = '".$data->disponible."' WHERE id = '$id'");
-    echo $sql;
-    /*if ($sql){
+    if ($sql){
         exit(json_encode(array('status' => 'success')));
     }else{
         exit(json_encode(array('status' => 'error')));
-    }*/
+    }
  }   
 }
 
