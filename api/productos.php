@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
-    $sql = $conn->query("INSERT INTO productos (nombre, precio, cantidad, id_usuario, id_usuario) VALUES ('$data->nombre','$data->precio','$data->cantidad','$data->id_usuario')");
+    $sql = $conn->query("INSERT INTO productos (nombre, precio, cantidad, id_usuario, ) VALUES ('$data->nombre','$data->precio','$data->cantidad','$data->id_usuario')");
     if ($sql){
         $data->id = $conn->insert_id;
         exit(json_encode($data));
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
     if(isset($id)){
         
-        $sql = $conn->query("DELETE FROM ordenes WHERE id = '$id'");
+        $sql = $conn->query("DELETE FROM productos WHERE id = '$id'");
 
         if($sql) {
             exit(json_encode(array('status' => 'success')));
