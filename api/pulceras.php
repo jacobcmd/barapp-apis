@@ -11,8 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $id = $conn->real_escape_string($data->id);        
         $sql = $conn->query("SELECT * FROM pulseras WHERE id = '$id'");
         $data = $sql->fetch_assoc();
+        if($data==null){
+            exit(json_encode(array('status' => 'pulcera no registrada')));
+        }
     }else{
-        exit(json_encode(array('status' => 'pulcera no registrada')));
+        exit(json_encode(array('status' => 'introdusca un valor')));
         
     }
 
