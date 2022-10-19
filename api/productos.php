@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if($data==null){
             exit(json_encode(array('status' => 'Producto no registrado')));
         }
-    }else{
+    }else{        
         $data = array();
         $sql = $conn->query("SELECT * FROM productos");
         while ($d = $sql->fetch_assoc()){
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
-    $sql = $conn->query("INSERT INTO productos (nombre, precio, cantidad, id_usuario, ) VALUES ('$data->nombre','$data->precio','$data->cantidad','$data->id_usuario')");
+    $sql = $conn->query("INSERT INTO productos (nombre, precio, disponible ) VALUES ('$data->nombre','$data->precio','$data->disponible')");
     if ($sql){
         $data->id = $conn->insert_id;
         exit(json_encode($data));
