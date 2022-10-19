@@ -3,12 +3,23 @@ include_once 'config/dbh.php';
 include_once 'config/cors.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if(isset($_GET['id'])){
-        $id =$conn->real_escape_string($_GET['id']);
-        $sql = $conn->query("SELECT * FROM ordenes WHERE id_purlecera = '$id");
+    $data = json_decode(file_get_contents("php://input"));
+
+	$id = $data->id;
+
+    if(isset($id)){
+        $id = $conn->real_escape_string($data->id);        
+        $sql = $conn->query("SELECT * FROM ordenes WHERE id_purlcera = '$id'");
         $data = $sql->fetch_assoc();
+        if($data==null){
+            exit(json_encode(array('status' => 'Producto no registrado')));
+        }
     }else{
-        exit(json_encode(array('status' => 'error')));
+        $data = array();
+        $sql = $conn->query("SELECT * FROM ordenes");
+        while ($d = $sql->fetch_assoc()){
+            $data[] = $d;
+        }
     }
 
     exit(json_encode($data));
@@ -16,8 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
-    
-    $sql = $conn->query("INSERT INTO ordenes (id_purlcera, id_producto, cantidad, id_usuario) VALUES ('".$data->name."','".$data->address."','".$data->phone."')");
+    $sql = $conn->query("INSERT INTO ordenes (id_purlcera, id_producto, cantidad) VALUES ('".$data->id_purlcera."','".$data->precio."')");
     if ($sql){
         $data->id = $conn->insert_id;
         exit(json_encode($data));
@@ -27,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
- if(isset($_GET['id'])){
-    $id = $conn->real_escape_string($_GET['id']);
     $data = json_decode(file_get_contents("php://input"));
-    $sql = $conn->query("UPDATE ordenes SET name = '".$data->name."', address = '".$data->address."', phone = '".$data->phone."' WHERE id = '$id'");
+    $id = $data->id;
+ if(isset($id)){    
+    $sql = $conn->query("UPDATE productos SET nombre = '".$data->nombre."',  precio = '".$data->precio."',  disponible = '".$data->disponible."' WHERE id = '$id'");
     if ($sql){
         exit(json_encode(array('status' => 'success')));
     }else{
@@ -40,9 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    if(isset($_GET['id'])){
-        $id = $conn->real_escape_string($_GET['id']);
-        $sql = $conn->query("DELETE FROM ordenes WHERE id = '$id");
+    $data = json_decode(file_get_contents("php://input"));
+    $id = $data->id;
+
+    if(isset($id)){
+        
+        $sql = $conn->query("DELETE FROM productos WHERE id = '$id'");
 
         if($sql) {
             exit(json_encode(array('status' => 'success')));
