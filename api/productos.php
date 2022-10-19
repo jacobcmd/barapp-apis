@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $sql = $conn->query("SELECT * FROM productos WHERE id = '$id'");
         $data = $sql->fetch_assoc();
         if($data==null){
-            exit(json_encode(array('status' => 'pulcera no registrada')));
+            exit(json_encode(array('status' => 'Producto no registrado')));
         }
     }else{
         $data = array();
