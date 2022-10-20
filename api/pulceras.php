@@ -27,14 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = json_decode(file_get_contents("php://input"));
+    /*$data = json_decode(file_get_contents("php://input"));
     $sql = $conn->query("INSERT INTO pulseras (id) VALUES ('$data->id')");
     if ($sql){
         $data->id = $conn->insert_id;
         exit(json_encode($data));
     }else{
         exit(json_encode(array('status' => 'error')));
-    }
+    }*/
+    echo "post pulseras"
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
