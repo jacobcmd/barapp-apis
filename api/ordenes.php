@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
     if(isset($id)){
         
-        $sql = $conn->query("DELETE FROM productos WHERE id = '$id'");
+        $sql = $conn->query("DELETE FROM ordenes WHERE id = '$id'");
 
         if($sql) {
             exit(json_encode(array('status' => 'success')));
