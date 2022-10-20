@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
-    $sql = $conn->query("INSERT INTO ordenes (id_purlcera, id_producto, cantidad) VALUES ('".$data->id_purlcera."','".$data->precio."')");
+    $sql = $conn->query("INSERT INTO ordenes (id_purlcera, id_producto, cantidad, id_usuario) VALUES ('$data->id_purlcera','$data->id_producto','$data->cantidad','$data->id_usuario')");
     if ($sql){
         $data->id = $conn->insert_id;
         exit(json_encode($data));
