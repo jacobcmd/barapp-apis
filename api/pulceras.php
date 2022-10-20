@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }else{
         exit(json_encode(array('status' => 'error')));
     }*/
-    echo "post pulseras"
+    echo "post pulseras";
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
