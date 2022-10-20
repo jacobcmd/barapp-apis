@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
-    $sql = $conn->query("INSERT INTO pulseras (id) VALUES ('".$data->id."')");
+    $sql = $conn->query("INSERT INTO pulseras (id) VALUES ('$data->id')");
     if ($sql){
         $data->id = $conn->insert_id;
         exit(json_encode($data));
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     $data = json_decode(file_get_contents("php://input"));
     $id = $data->id;
  if(isset($id)){    
-    $sql = $conn->query("UPDATE pulseras SET pagado = '".$data->pagado."' WHERE id = '$id'");
+    $sql = $conn->query("UPDATE pulseras SET pagado = '$data->pagado' WHERE id = '$id'");
     if ($sql){
         exit(json_encode(array('status' => 'success')));
     }else{
