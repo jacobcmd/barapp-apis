@@ -15,7 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             exit(json_encode(array('status' => 'pulcera no registrada')));
         }
     }else{
-        exit(json_encode(array('status' => 'introdusca un valor')));
+        $data = array();
+        $sql = $conn->query("SELECT * FROM ordenes");
+        while ($d = $sql->fetch_assoc()){
+            $data[] = $d;
+        }
         
     }
 
