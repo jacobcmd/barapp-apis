@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }else{
         exit(json_encode(array('status' => 'error')));
     }*/
+    echo "Post";
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
