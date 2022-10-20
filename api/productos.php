@@ -26,15 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    /*$data = json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"));
     $sql = $conn->query("INSERT INTO productos (nombre, precio) VALUES ('$data->nombre','$data->precio')");
     if ($sql){
         $data->id = $conn->insert_id;
         exit(json_encode($data));
     }else{
         exit(json_encode(array('status' => 'error')));
-    }*/
-    echo "Post";
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
