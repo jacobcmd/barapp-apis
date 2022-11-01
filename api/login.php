@@ -29,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode(array('token' => $token));
         } else {
             http_response_code(400);
-            echo json_encode(array('message' => 'Login Failed!1'));
+            echo json_encode(array('message' => 'Login Failed!1 '));
         }
     } else {
         http_response_code(400);
-        echo json_encode(array('message' => 'Login Failed!2'));
+        echo json_encode(array('message' => 'Login Failed!2 '));
     }
 }
 
