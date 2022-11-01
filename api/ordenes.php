@@ -1,6 +1,7 @@
 <?php
 include_once 'config/dbh.php';
-include_once 'config/cors.php';
+//include_once 'config/cors.php';
+include_once 'headers.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $data = json_decode(file_get_contents("php://input"));
