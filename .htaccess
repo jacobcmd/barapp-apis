@@ -1,3 +1,5 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^api/productos/?$ api/productos.php
+RewriteRule ^api/productos/([0-9]+)?$ api/productos.php?id=$1
